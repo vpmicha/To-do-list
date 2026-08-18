@@ -1,10 +1,12 @@
 import json
-from pickle import NONE
 
 class To_do_list():
     def __init__(self):
-        with open('To do list', 'r') as file:
-            self.task = json.load(file)
+        try:
+            with open('To do list', 'r') as file:
+                self.tasks = json.load(file)
+        except (FileNotFoundError, json.JSONDecodeError):
+            self.tasks = {}
             
     def add_task(self,task):
         if task.lower() not in self.tasks:
@@ -32,16 +34,20 @@ class To_do_list():
     
     def __str__(self):
         with open('To do list', 'r') as file:
-            todo = json.load(file)
-            return str(todo)
+            return str(json.load(file))
+           
 
 todo = To_do_list()
 todo.add_task('Learn Git and GitHub')
 todo.add_task('Learn Machine learning')
 todo.add_task('Learn Python')
+todo.add_task('Learn Linear Algebra')
 
-todo.remove_task('Learn Machine learning')
+print(todo)
+
+todo.remove_task('Learn Linear Algebra')
 todo.complete('Learn Git and GitHub')
+todo.complete('Learn Python')
 
 print(todo)
         
