@@ -9,6 +9,3 @@ class To_do_list():
             self.task[task] = False
         else:
             print('Task already in to-do list')
-            
-        
-
